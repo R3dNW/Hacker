@@ -47,16 +47,10 @@ namespace RainingSymbols
         static List<Position> posQueue;
         static List<char> charQueue;
 
-        static int screenWidth;
-        static int screenHeight;
-
         static GraphicsQueue()
         {
             posQueue = new List<Position>();
             charQueue = new List<char>();
-
-            screenWidth = Console.WindowWidth;
-            screenHeight = Console.WindowHeight;
         }
 
         public static void Push(Position pos, char symbol)
@@ -72,18 +66,16 @@ namespace RainingSymbols
             }
         }
 
+        public static void ClearScreen()
+        {
+            posQueue = new List<Position>();
+            charQueue = new List<char>();
+
+            Console.Clear();
+        }
+
         public static void Draw()
         {
-            if (screenWidth != Console.WindowWidth)
-            {
-                Console.Clear();
-            }
-
-            if (screenHeight != Console.WindowHeight)
-            {
-                Console.Clear();
-            }
-
             if (posQueue.Count != charQueue.Count)
             {
                 posQueue = new List<Position>();
@@ -105,9 +97,6 @@ namespace RainingSymbols
                 posQueue.RemoveAt(indexToCheck);
                 charQueue.RemoveAt(indexToCheck);
             }
-
-            screenWidth = Console.WindowWidth;
-            screenHeight = Console.WindowHeight;
         }
     }
 }

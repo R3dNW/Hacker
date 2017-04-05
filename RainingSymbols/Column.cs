@@ -23,6 +23,12 @@ namespace RainingSymbols
                     this.chars.Add(Utilities.PrintableChars[Utilities.random.Next(0, Utilities.PrintableChars.Length)]);
                 }
 
+                value = value >= Console.WindowHeight
+                    ? Console.WindowHeight - 2
+                    : value <= 0
+                        ? 0
+                        : value;
+
                 int lengthDiff = value - this._Length;
 
                 if (lengthDiff > 0)
@@ -40,11 +46,7 @@ namespace RainingSymbols
                     }
                 }
 
-                this._Length = value >= Console.WindowHeight
-                    ? Console.WindowHeight - 2
-                    : value <= 0
-                        ? 0
-                        : value;
+                this._Length = value;
             }
         }
 
@@ -74,15 +76,6 @@ namespace RainingSymbols
 
         public void Update()
         {
-            /*if (Console.WindowHeight > this.chars.Count)
-            {
-                this.chars.Add(Utilities.PrintableChars[Utilities.random.Next(0, Utilities.PrintableChars.Length)]);
-            }
-            else if (Console.WindowHeight < this.chars.Count)
-            {
-                this.chars.RemoveAt(this.chars.Count - 1);
-            }*/
-
             foreach (int y in Utilities.SelectRandomValuesInRange(0, this.chars.Count, game.charChangeRate))
             {
                 this.chars[y] = Utilities.PrintableChars[Utilities.random.Next(0, Utilities.PrintableChars.Length)];
